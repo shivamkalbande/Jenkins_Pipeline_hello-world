@@ -3,6 +3,7 @@ pipeline {
   triggers {
     // * * * * * //--> Every one minute
     // H/2 * * * * --> Every 2 minutes
+      pollSCM '30 14 * * *'  //-> at 14:30 every day 
      pollSCM 'H/2 * * * *'
     //  pollSCM '* * * * *'
   }
