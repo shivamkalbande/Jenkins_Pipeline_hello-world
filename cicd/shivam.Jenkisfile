@@ -1,12 +1,10 @@
 pipeline {
   agent any
-  triggers {
-    // * * * * * //--> Every one minute
-    // H/2 * * * * --> Every 2 minutes
-    // MINUTE (0-59), HOUR (0-23), DAY (1-31), MONTH (1-12), DAY OF THE WEEK (0-6)
-      pollSCM '30 14 * * *'  //-> at 14:30 every day 
-     //pollSCM 'H/2 * * * *'
-    //  pollSCM '* * * * *'
+  options {
+    disableConcurrentBuilds()
+    disableResume()
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+    timeout(time: 1, unit: 'HOURS')
   }
   tools {
     maven 'maven-3.6.3' 
@@ -16,6 +14,18 @@ pipeline {
       steps {
         sh 'mvn clean package'
       }
+    }
+    stage ('Deploy') {
+      steps {
+        script {
+          deploy adapters: [tomcat9(credentialsId: 'tomcat_credential', path: '', url: 'http://10.101.104.21:8080')], contextPath: '/pipeline', onFailure: false, war: 'webapp/target/*.war' 
+        }
+      }
+    }
+  }
+  post {
+    always {
+      deleteDir()
     }
   }
 }
