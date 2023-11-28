@@ -1,7 +1,10 @@
 pipeline {
   agent any
   triggers {
-    githubPush()
+    // * * * * * --> Every one minute
+    // H/2 * * * * --> Every 2 minutes
+    //pollSCM 'H/2 * * * *'
+      pollSCM '* * * * *'
   }
   tools {
     maven 'maven-3.6.3' 
