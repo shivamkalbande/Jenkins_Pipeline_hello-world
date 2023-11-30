@@ -6,11 +6,19 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '10'))
     timeout(time: 1, unit: 'HOURS')
   }
+  parameters {
+    choice(name: 'MAVEN_GOAL', choices: ['compile', 'test', 'package', 'install'], description: 'Maven goal')
+  }
   stages {
     stage ('Build') {
       steps {
-        sh 'mvn clean package'
+        sh "mvn clean ${params.MAVEN_GOAL}"
       }
+    }
+  }
+  post {
+    always {
+      deleteDir()
     }
   }
 }
