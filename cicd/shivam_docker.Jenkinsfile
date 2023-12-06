@@ -7,7 +7,8 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
     tools {
-        maven 'maven-3.6.3'
+        //maven 'maven-3.6.3'
+        maven 'Maven'
     }
     environment {
         TAG = "${BUILD_NUMBER}-${new Date().format('yyyyMMdd-HHmmss')}"
