@@ -32,7 +32,7 @@ pipeline {
         stage('Pushing Docker Image to Dockerhub') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_credential') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker_credential_ssk') {
                         docker.image("shivamkalbande/jenkins_pipeline_hello_world:${TAG}").push()
                         docker.image("shivamkalbande/jenkins_pipeline_hello_world:${TAG}").push("latest")
                     }
