@@ -1,5 +1,5 @@
 pipeline {
-    agent docker
+    agent any
     options {
         disableConcurrentBuilds()
         disableResume()
@@ -33,8 +33,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker_credential_ssk') {
-                        docker.image("shivamkalbande/jenkins_pipeline_hello_world:${TAG}").push()
-                        docker.image("shivamkalbande/jenkins_pipeline_hello_world:${TAG}").push("latest")
+                        docker.image("shivamkalbande/shivamk23/ssk_devops_repo:${TAG}").push()
+                        docker.image("shivamkalbande/shivamk23/ssk_devops_repo:${TAG}").push("latest")
                     }
                 }
             }
@@ -43,7 +43,7 @@ pipeline {
             steps {
                 sh "docker stop hello-world || true"
                 sh "docker rm hello-world || true"
-                sh "docker run --name hello-world -d -p 9004:8080 shivamkalbande/jenkins_pipeline_hello_world:${TAG}"
+                sh "docker run --name hello-world -d -p 9004:8080 shivamk23/ssk_devops_repo:${TAG}"
             }
         }
     }
