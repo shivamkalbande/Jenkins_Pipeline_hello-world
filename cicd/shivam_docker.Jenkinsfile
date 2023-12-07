@@ -17,6 +17,7 @@ pipeline {
             steps {
                 script {
                     catchError {
+                        sh 'sleep 1000'
                         sh './mvnw clean package'
                     }
                 }
