@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker_credential_ssk') {
-                        docker.image("shivamkalbande/shivamk23/ssk_devops_repo:${TAG}").push()
+                       // docker.image("shivamkalbande/shivamk23/ssk_devops_repo:${TAG}").push()
                         docker.image("shivamkalbande/shivamk23/ssk_devops_repo:${TAG}").push("latest")
                     }
                 }
