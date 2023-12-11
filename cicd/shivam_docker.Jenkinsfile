@@ -10,7 +10,7 @@ pipeline {
         maven 'maven-3.6.3'
     }
     environment {
-        TAG = "${BUILD_NUMBER}-${new Date().format('yyyyMMdd-HH')}"
+        TAG = "${BUILD_NUMBER}-${new Date().format('yyyyMMdd')}"
     }
     stages {
         stage('Build') {
