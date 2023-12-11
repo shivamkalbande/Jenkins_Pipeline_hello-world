@@ -33,11 +33,15 @@ pipeline {
         stage('Pushing Docker Image to Dockerhub') {
             steps {
                 script {
-                    // Use the 'withCredentials' block to securely access Docker Hub credentials
-            withCredentials([usernamePassword(credentialsId: 'docker_credential_ssk', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                // Use the 'sh' step to execute shell commands
-                sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin https://registry.hub.docker.com"
-                docker.image("shivamk23/ssk_devops_repo:${TAG}").push("latest")
+                    // // Use the 'withCredentials' block to securely access Docker Hub credentials
+            //withCredentials([usernamePassword(credentialsId: 'docker_credential_ssk', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+              //  // Use the 'sh' step to execute shell commands
+                //sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin https://registry.hub.docker.com"
+                //docker.image("shivamk23/ssk_devops_repo:${TAG}").push("latest")
+
+            docker.withRegistry('https://registry.hub.docker.com', 'docker_credential_ssk') {
+            docker.image("shivamk23/ssk_devops_repo:${TAG}").push()
+            docker.image("shivamk23/ssk_devops_repo:${TAG}").push("latest")
                     }
                 }
             }
