@@ -26,7 +26,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    docker.build("shivamk23/jenkins_pipeline_hello_world:${TAG}")
+                    docker.build("shivamk23/ssk_devops_repo:${TAG}")
                 }
             }
         }
