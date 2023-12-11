@@ -26,7 +26,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    docker.build("shivamkalbande/jenkins_pipeline_hello_world:${TAG}")
+                    docker.build("shivamk23/jenkins_pipeline_hello_world:${TAG}")
                 }
             }
         }
@@ -40,8 +40,8 @@ pipeline {
                 //docker.image("shivamk23/ssk_devops_repo:${TAG}").push("latest")
 
             docker.withRegistry('https://registry.hub.docker.com', 'docker_credential_ssk') {
-            docker.image("shivamkalbande/ssk_devops_repo:${TAG}").push()
-            docker.image("shivamkalbande/ssk_devops_repo:${TAG}").push("latest")
+            docker.image("shivamk23/ssk_devops_repo:${TAG}").push()
+            docker.image("shivamk23/ssk_devops_repo:${TAG}").push("latest")
                     }
                 }
             }
