@@ -40,8 +40,8 @@ pipeline {
                 //docker.image("shivamk23/ssk_devops_repo:${TAG}").push("latest")
 
             docker.withRegistry('https://registry.hub.docker.com', 'docker_credential_ssk') {
-            docker.image("shivamk23/ssk_devops_repo:${TAG}").push()
-            docker.image("shivamk23/ssk_devops_repo:${TAG}").push("latest")
+            docker.image("shivamkalbande/ssk_devops_repo:${TAG}").push()
+            docker.image("shivamkalbande/ssk_devops_repo:${TAG}").push("latest")
                     }
                 }
             }
